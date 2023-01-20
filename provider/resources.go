@@ -16,7 +16,10 @@ package elasticstack
 
 import (
 	"fmt"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 	"path/filepath"
+	"strings"
 
 	elasticstack "github.com/elastic/terraform-provider-elasticstack/provider"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
@@ -59,7 +62,7 @@ func Provider() tfbridge.ProviderInfo {
 		// Change this to your personal name (or a company name) that you
 		// would like to be shown in the Pulumi Registry if this package is published
 		// there.
-		Publisher: "Pulumi",
+		Publisher: "Zlepper",
 		// LogoURL is optional but useful to help identify your package in the Pulumi Registry
 		// if this package is published there.
 		//
@@ -80,7 +83,7 @@ func Provider() tfbridge.ProviderInfo {
 		Repository: "https://github.com/zlepper/pulumi-elasticstack",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
-		GitHubOrg: "",
+		GitHubOrg: "elastic",
 		Config:    map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
 			// no additional points are required.
@@ -132,12 +135,12 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 		Golang: &tfbridge.GolangInfo{
-			ImportBasePath: filepath.Join(
-				fmt.Sprintf("github.com/pulumi/pulumi-%[1]s/sdk/", mainPkg),
+			ImportBasePath: strings.ReplaceAll(filepath.Join(
+				fmt.Sprintf("github.com/zlepper/pulumi-%[1]s/sdk/", mainPkg),
 				tfbridge.GetModuleMajorVersion(version.Version),
 				"go",
 				mainPkg,
-			),
+			), "\\", "/"),
 			GenerateResourceContainerTypes: true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
@@ -147,7 +150,32 @@ func Provider() tfbridge.ProviderInfo {
 		},
 	}
 
+	p.ResourcesMap().Range(func(resourceName string, resourceDefinition shim.Resource) bool {
+		prov.Resources[resourceName] = &tfbridge.ResourceInfo{
+			Tok:  tfbridge.MakeResource(mainPkg, mainMod, resourceNameToClassName(resourceName)),
+			Docs: &tfbridge.DocInfo{},
+		}
+		return true
+	})
+
+	p.DataSourcesMap().Range(func(dataSourceName string, dataSourceDefinition shim.Resource) bool {
+		prov.DataSources[dataSourceName] = &tfbridge.DataSourceInfo{
+			Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "get"+resourceNameToClassName(dataSourceName)),
+		}
+		return true
+	})
+
 	prov.SetAutonaming(255, "-")
 
 	return prov
+}
+
+func resourceNameToClassName(name string) string {
+	parts := strings.Split(name, "_")[2:]
+
+	for i := range parts {
+		parts[i] = cases.Title(language.English).String(parts[i])
+	}
+
+	return strings.Join(parts, "")
 }

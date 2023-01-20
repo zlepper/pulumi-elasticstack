@@ -18,9 +18,9 @@ package main
 
 import (
 	_ "embed"
+	elasticstack "github.com/zlepper/pulumi-elasticstack/provider"
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	elasticstack "github.com/zlepper/pulumi-elasticstack/provider"
 	"github.com/zlepper/pulumi-elasticstack/provider/pkg/version"
 )
 

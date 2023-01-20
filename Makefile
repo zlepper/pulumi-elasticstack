@@ -1,8 +1,8 @@
-PROJECT_NAME := xyz Package
+PROJECT_NAME := elasticstack Package
 
 SHELL            := /bin/bash
-PACK             := xyz
-ORG              := pulumi
+PACK             := elasticstack
+ORG              := zlepper
 PROJECT          := github.com/${ORG}/pulumi-${PACK}
 NODE_MODULE_NAME := @pulumi/${PACK}
 TF_NAME          := ${PACK}
@@ -29,13 +29,13 @@ prepare::
 	mv "provider/cmd/pulumi-resource-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-resource-${NAME}
 
 	if [[ "${OS}" != "Darwin" ]]; then \
-		sed -i 's,github.com/pulumi/pulumi-xyz,${REPOSITORY},g' provider/go.mod; \
+		sed -i 's,github.com/pulumi/pulumi-elasticstack,${REPOSITORY},g' provider/go.mod; \
 		find ./ ! -path './.git/*' -type f -exec sed -i 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
 	fi
 
 	# In MacOS the -i parameter needs an empty string to execute in place.
 	if [[ "${OS}" == "Darwin" ]]; then \
-		sed -i '' 's,github.com/pulumi/pulumi-xyz,${REPOSITORY},g' provider/go.mod; \
+		sed -i '' 's,github.com/pulumi/pulumi-elasticstack,${REPOSITORY},g' provider/go.mod; \
 		find ./ ! -path './.git/*' -type f -exec sed -i '' 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
 	fi
 
@@ -82,9 +82,10 @@ build_dotnet:: DOTNET_VERSION := $(shell pulumictl get version --language dotnet
 build_dotnet:: install_plugins tfgen # build the dotnet sdk
 	pulumictl get version --language dotnet
 	$(WORKING_DIR)/bin/$(TFGEN) dotnet --overlays provider/overlays/dotnet --out sdk/dotnet/
+	sleep 5
 	cd sdk/dotnet/ && \
 		echo "${DOTNET_VERSION}" >version.txt && \
-        dotnet build /p:Version=${DOTNET_VERSION}
+        dotnet build $(WORKING_DIR)/sdk/dotnet/Pulumi.Elasticstack.csproj "-p:Version=${DOTNET_VERSION}"
 
 build_go:: install_plugins tfgen # build the go sdk
 	$(WORKING_DIR)/bin/$(TFGEN) go --overlays provider/overlays/go --out sdk/go/
