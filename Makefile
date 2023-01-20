@@ -78,7 +78,7 @@ build_python:: install_plugins tfgen # build the python sdk
         rm ./bin/setup.py.bak && \
         cd ./bin && python3 setup.py build sdist
 
-build_dotnet:: DOTNET_VERSION := $(shell pulumictl get version --language dotnet)
+build_dotnet:: DOTNET_VERSION := 0.0.1-alpha1
 build_dotnet:: install_plugins tfgen # build the dotnet sdk
 	pulumictl get version --language dotnet
 	$(WORKING_DIR)/bin/$(TFGEN) dotnet --overlays provider/overlays/dotnet --out sdk/dotnet/
@@ -86,6 +86,11 @@ build_dotnet:: install_plugins tfgen # build the dotnet sdk
 	cd sdk/dotnet/ && \
 		echo "${DOTNET_VERSION}" >version.txt && \
         dotnet build $(WORKING_DIR)/sdk/dotnet/Pulumi.Elasticstack.csproj "-p:Version=${DOTNET_VERSION}"
+
+push_dotnet:: DOTNET_VERSION := 0.0.1-alpha1
+push_dotnet:: build_dotnet
+	@if test -z "${NUGET_API_KEY}"; then echo "NUGET_API_KEY not set"; exit 1; fi
+	dotnet nuget push "$(WORKING_DIR)/sdk/dotnet/bin/Debug/Pulumi.Elasticstack.${DOTNET_VERSION}.nupkg" --api-key "${NUGET_API_KEY}" -s nuget.org
 
 build_go:: install_plugins tfgen # build the go sdk
 	$(WORKING_DIR)/bin/$(TFGEN) go --overlays provider/overlays/go --out sdk/go/
