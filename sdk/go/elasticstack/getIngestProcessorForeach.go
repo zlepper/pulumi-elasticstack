@@ -57,6 +57,7 @@ import (
 // }
 // ```
 func GetIngestProcessorForeach(ctx *pulumi.Context, args *GetIngestProcessorForeachArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorForeachResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorForeachResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorForeach:getIngestProcessorForeach", args, &rv, opts...)
 	if err != nil {

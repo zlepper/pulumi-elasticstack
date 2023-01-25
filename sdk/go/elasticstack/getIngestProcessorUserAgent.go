@@ -47,6 +47,7 @@ import (
 // }
 // ```
 func GetIngestProcessorUserAgent(ctx *pulumi.Context, args *GetIngestProcessorUserAgentArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorUserAgentResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorUserAgentResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorUserAgent:getIngestProcessorUserAgent", args, &rv, opts...)
 	if err != nil {

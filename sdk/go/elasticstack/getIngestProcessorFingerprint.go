@@ -47,6 +47,7 @@ import (
 // }
 // ```
 func GetIngestProcessorFingerprint(ctx *pulumi.Context, args *GetIngestProcessorFingerprintArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorFingerprintResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorFingerprintResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorFingerprint:getIngestProcessorFingerprint", args, &rv, opts...)
 	if err != nil {

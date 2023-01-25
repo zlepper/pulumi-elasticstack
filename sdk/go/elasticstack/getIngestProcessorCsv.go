@@ -51,6 +51,7 @@ import (
 //
 // If the `trim` option is enabled then any whitespace in the beginning and in the end of each unquoted field will be trimmed. For example with configuration above, a value of A, B will result in field field2 having value {nbsp}B (with space at the beginning). If trim is enabled A, B will result in field field2 having value B (no whitespace). Quoted fields will be left untouched.
 func GetIngestProcessorCsv(ctx *pulumi.Context, args *GetIngestProcessorCsvArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorCsvResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorCsvResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorCsv:getIngestProcessorCsv", args, &rv, opts...)
 	if err != nil {

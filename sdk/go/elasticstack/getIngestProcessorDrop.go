@@ -45,6 +45,7 @@ import (
 // }
 // ```
 func GetIngestProcessorDrop(ctx *pulumi.Context, args *GetIngestProcessorDropArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorDropResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorDropResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorDrop:getIngestProcessorDrop", args, &rv, opts...)
 	if err != nil {

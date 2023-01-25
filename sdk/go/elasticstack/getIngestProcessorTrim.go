@@ -47,6 +47,7 @@ import (
 // }
 // ```
 func GetIngestProcessorTrim(ctx *pulumi.Context, args *GetIngestProcessorTrimArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorTrimResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorTrimResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorTrim:getIngestProcessorTrim", args, &rv, opts...)
 	if err != nil {

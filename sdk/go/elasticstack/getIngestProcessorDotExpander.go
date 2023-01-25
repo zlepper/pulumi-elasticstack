@@ -45,6 +45,7 @@ import (
 // }
 // ```
 func GetIngestProcessorDotExpander(ctx *pulumi.Context, args *GetIngestProcessorDotExpanderArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorDotExpanderResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorDotExpanderResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorDotExpander:getIngestProcessorDotExpander", args, &rv, opts...)
 	if err != nil {

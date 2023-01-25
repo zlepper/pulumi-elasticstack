@@ -53,7 +53,7 @@ namespace Pulumi.Elasticstack
         {
             var dst = src ?? new global::Pulumi.InvokeOptions{};
             dst.Version = src?.Version ?? Version;
-            dst.PluginDownloadURL = src?.PluginDownloadURL ?? "https://github.com/zlepper/pulumi-elasticstack/releases/";
+            dst.PluginDownloadURL = src?.PluginDownloadURL ?? "github://api.github.com/zlepper";
             return dst;
         }
 

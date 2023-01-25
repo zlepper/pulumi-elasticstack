@@ -45,6 +45,7 @@ import (
 // }
 // ```
 func GetIngestProcessorLowercase(ctx *pulumi.Context, args *GetIngestProcessorLowercaseArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorLowercaseResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorLowercaseResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorLowercase:getIngestProcessorLowercase", args, &rv, opts...)
 	if err != nil {

@@ -46,6 +46,7 @@ import (
 // }
 // ```
 func GetIngestProcessorRegisteredDomain(ctx *pulumi.Context, args *GetIngestProcessorRegisteredDomainArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorRegisteredDomainResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorRegisteredDomainResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorRegisteredDomain:getIngestProcessorRegisteredDomain", args, &rv, opts...)
 	if err != nil {

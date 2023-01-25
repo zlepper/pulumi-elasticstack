@@ -180,7 +180,7 @@ namespace Pulumi.Elasticstack
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/zlepper/pulumi-elasticstack/releases/",
+                PluginDownloadURL = "github://api.github.com/zlepper",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.

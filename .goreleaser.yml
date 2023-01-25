@@ -20,5 +20,11 @@ builds:
     main: ./cmd/pulumi-resource-elasticstack/
 release:
   disable: false
+  github:
+    owner: zlepper
+    name: "pulumi-elastickstack"
+  skip_upload: true
 snapshot:
   name_template: "{{ .Tag }}-SNAPSHOT"
+changelog:
+  skip: true

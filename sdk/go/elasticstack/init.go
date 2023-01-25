@@ -10,6 +10,56 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type module struct {
+	version semver.Version
+}
+
+func (m *module) Version() semver.Version {
+	return m.version
+}
+
+func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
+	switch typ {
+	case "elasticstack:index/clusterSettings:ClusterSettings":
+		r = &ClusterSettings{}
+	case "elasticstack:index/componentTemplate:ComponentTemplate":
+		r = &ComponentTemplate{}
+	case "elasticstack:index/dataStream:DataStream":
+		r = &DataStream{}
+	case "elasticstack:index/index:Index":
+		r = &Index{}
+	case "elasticstack:index/indexLifecycle:IndexLifecycle":
+		r = &IndexLifecycle{}
+	case "elasticstack:index/indexTemplate:IndexTemplate":
+		r = &IndexTemplate{}
+	case "elasticstack:index/ingestPipeline:IngestPipeline":
+		r = &IngestPipeline{}
+	case "elasticstack:index/logstashPipeline:LogstashPipeline":
+		r = &LogstashPipeline{}
+	case "elasticstack:index/script:Script":
+		r = &Script{}
+	case "elasticstack:index/securityApiKey:SecurityApiKey":
+		r = &SecurityApiKey{}
+	case "elasticstack:index/securityRole:SecurityRole":
+		r = &SecurityRole{}
+	case "elasticstack:index/securityRoleMapping:SecurityRoleMapping":
+		r = &SecurityRoleMapping{}
+	case "elasticstack:index/securitySystemUser:SecuritySystemUser":
+		r = &SecuritySystemUser{}
+	case "elasticstack:index/securityUser:SecurityUser":
+		r = &SecurityUser{}
+	case "elasticstack:index/snapshotLifecycle:SnapshotLifecycle":
+		r = &SnapshotLifecycle{}
+	case "elasticstack:index/snapshotRepository:SnapshotRepository":
+		r = &SnapshotRepository{}
+	default:
+		return nil, fmt.Errorf("unknown resource type: %s", typ)
+	}
+
+	err = ctx.RegisterResource(typ, name, nil, r, pulumi.URN_(urn))
+	return
+}
+
 type pkg struct {
 	version semver.Version
 }
@@ -30,6 +80,86 @@ func (p *pkg) ConstructProvider(ctx *pulumi.Context, name, typ, urn string) (pul
 
 func init() {
 	version, _ := PkgVersion()
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/clusterSettings",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/componentTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/dataStream",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/index",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/indexLifecycle",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/indexTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/ingestPipeline",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/logstashPipeline",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/script",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/securityApiKey",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/securityRole",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/securityRoleMapping",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/securitySystemUser",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/securityUser",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/snapshotLifecycle",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"elasticstack",
+		"index/snapshotRepository",
+		&module{version},
+	)
 	pulumi.RegisterResourcePackage(
 		"elasticstack",
 		&pkg{version},

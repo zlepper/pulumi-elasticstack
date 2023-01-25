@@ -93,7 +93,7 @@ namespace Pulumi.Elasticstack
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/zlepper/pulumi-elasticstack/releases/",
+                PluginDownloadURL = "github://api.github.com/zlepper",
                 AdditionalSecretOutputs =
                 {
                     "password",

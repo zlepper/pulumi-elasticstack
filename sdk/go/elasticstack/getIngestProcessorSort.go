@@ -46,6 +46,7 @@ import (
 // }
 // ```
 func GetIngestProcessorSort(ctx *pulumi.Context, args *GetIngestProcessorSortArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorSortResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorSortResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorSort:getIngestProcessorSort", args, &rv, opts...)
 	if err != nil {

@@ -49,6 +49,7 @@ import (
 // }
 // ```
 func GetIngestProcessorSetSecurityUser(ctx *pulumi.Context, args *GetIngestProcessorSetSecurityUserArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorSetSecurityUserResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorSetSecurityUserResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorSetSecurityUser:getIngestProcessorSetSecurityUser", args, &rv, opts...)
 	if err != nil {

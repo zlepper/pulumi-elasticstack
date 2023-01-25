@@ -36,6 +36,7 @@ import (
 // }
 // ```
 func LookupSecurityRole(ctx *pulumi.Context, args *LookupSecurityRoleArgs, opts ...pulumi.InvokeOption) (*LookupSecurityRoleResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupSecurityRoleResult
 	err := ctx.Invoke("elasticstack:index/getSecurityRole:getSecurityRole", args, &rv, opts...)
 	if err != nil {

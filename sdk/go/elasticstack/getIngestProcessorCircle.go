@@ -47,6 +47,7 @@ import (
 // }
 // ```
 func GetIngestProcessorCircle(ctx *pulumi.Context, args *GetIngestProcessorCircleArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorCircleResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorCircleResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorCircle:getIngestProcessorCircle", args, &rv, opts...)
 	if err != nil {

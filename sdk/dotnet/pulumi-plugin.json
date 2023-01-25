@@ -1,5 +1,5 @@
 {
   "resource": true,
   "name": "elasticstack",
-  "server": "https://github.com/zlepper/pulumi-elasticstack/releases/"
+  "server": "github://api.github.com/zlepper"
 }

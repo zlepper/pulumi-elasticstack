@@ -12,6 +12,7 @@ import (
 
 // This data source provides the information about the registered snaphosts repositories
 func LookupSnapshotRepository(ctx *pulumi.Context, args *LookupSnapshotRepositoryArgs, opts ...pulumi.InvokeOption) (*LookupSnapshotRepositoryResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv LookupSnapshotRepositoryResult
 	err := ctx.Invoke("elasticstack:index/getSnapshotRepository:getSnapshotRepository", args, &rv, opts...)
 	if err != nil {

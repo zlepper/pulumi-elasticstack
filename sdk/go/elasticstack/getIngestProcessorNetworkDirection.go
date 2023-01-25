@@ -49,6 +49,7 @@ import (
 // }
 // ```
 func GetIngestProcessorNetworkDirection(ctx *pulumi.Context, args *GetIngestProcessorNetworkDirectionArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorNetworkDirectionResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorNetworkDirectionResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorNetworkDirection:getIngestProcessorNetworkDirection", args, &rv, opts...)
 	if err != nil {

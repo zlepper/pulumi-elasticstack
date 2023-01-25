@@ -45,6 +45,7 @@ import (
 // }
 // ```
 func GetIngestProcessorUrldecode(ctx *pulumi.Context, args *GetIngestProcessorUrldecodeArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorUrldecodeResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorUrldecodeResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorUrldecode:getIngestProcessorUrldecode", args, &rv, opts...)
 	if err != nil {

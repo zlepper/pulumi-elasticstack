@@ -46,6 +46,7 @@ import (
 // }
 // ```
 func GetIngestProcessorJoin(ctx *pulumi.Context, args *GetIngestProcessorJoinArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorJoinResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorJoinResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorJoin:getIngestProcessorJoin", args, &rv, opts...)
 	if err != nil {

@@ -16,6 +16,7 @@ import (
 //
 // See: https://www.elastic.co/guide/en/elasticsearch/reference/current/script-processor.html
 func GetIngestProcessorScript(ctx *pulumi.Context, args *GetIngestProcessorScriptArgs, opts ...pulumi.InvokeOption) (*GetIngestProcessorScriptResult, error) {
+	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetIngestProcessorScriptResult
 	err := ctx.Invoke("elasticstack:index/getIngestProcessorScript:getIngestProcessorScript", args, &rv, opts...)
 	if err != nil {
