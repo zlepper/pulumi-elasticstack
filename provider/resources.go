@@ -16,8 +16,11 @@ package elasticstack
 
 import (
 	"fmt"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
+	"log"
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -43,13 +46,29 @@ const (
 // it cannot be. Configuration variables can be read from `vars` using the `stringValue` function -
 // for example `stringValue(vars, "accessKey")`.
 func preConfigureCallback(vars resource.PropertyMap, c shim.ResourceConfig) error {
+	f, err := os.Create("E:\\crap\\elastickstackproviderlog.txt")
+	if err != nil {
+		log.Printf("err: %v", err)
+		return err
+	}
+
+	defer f.Close()
+
+	for key, value := range vars {
+		if key == "elasticsearch" {
+
+		}
+		f.WriteString(fmt.Sprintf("key: %s, value: %v\n", key, value))
+	}
+
 	return nil
 }
 
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	// Instantiate the Terraform provider
-	p := shimv2.NewProvider(elasticstack.New("v0.5.0"))
+	tf := elasticstack.New("v0.5.0")
+	p := shimv2.NewProvider(tf)
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
@@ -148,6 +167,16 @@ func Provider() tfbridge.ProviderInfo {
 				"Pulumi": "3.*",
 			},
 		},
+		ExtraConfig: map[string]*tfbridge.ConfigInfo{},
+	}
+
+	elasticArgs := tf.Schema["elasticsearch"].Elem.(*schema.Resource)
+
+	for key, value := range elasticArgs.Schema {
+		prov.ExtraConfig[key] = &tfbridge.ConfigInfo{
+			Info:   tfbridge.AutoName(key, 1000, "-"),
+			Schema: shimv2.NewSchema(value),
+		}
 	}
 
 	p.ResourcesMap().Range(func(resourceName string, resourceDefinition shim.Resource) bool {

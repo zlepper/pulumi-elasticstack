@@ -53,9 +53,49 @@
     },
     "config": {
         "variables": {
+            "api_key": {
+                "type": "string",
+                "secret": true
+            },
+            "ca_data": {
+                "type": "string"
+            },
+            "ca_file": {
+                "type": "string"
+            },
+            "cert_data": {
+                "type": "string"
+            },
+            "cert_file": {
+                "type": "string"
+            },
             "elasticsearch": {
                 "$ref": "#/types/elasticstack:config/elasticsearch:elasticsearch",
                 "description": "Elasticsearch connection configuration block.\n"
+            },
+            "endpoints": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "secret": true
+            },
+            "insecure": {
+                "type": "boolean"
+            },
+            "key_data": {
+                "type": "string",
+                "secret": true
+            },
+            "key_file": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string",
+                "secret": true
+            },
+            "username": {
+                "type": "string"
             }
         }
     },

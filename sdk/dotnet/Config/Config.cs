@@ -32,6 +32,41 @@ namespace Pulumi.Elasticstack
 
         private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("elasticstack");
 
+        private static readonly __Value<string?> _api_key = new __Value<string?>(() => __config.Get("api_key"));
+        public static string? Api_key
+        {
+            get => _api_key.Get();
+            set => _api_key.Set(value);
+        }
+
+        private static readonly __Value<string?> _ca_data = new __Value<string?>(() => __config.Get("ca_data"));
+        public static string? Ca_data
+        {
+            get => _ca_data.Get();
+            set => _ca_data.Set(value);
+        }
+
+        private static readonly __Value<string?> _ca_file = new __Value<string?>(() => __config.Get("ca_file"));
+        public static string? Ca_file
+        {
+            get => _ca_file.Get();
+            set => _ca_file.Set(value);
+        }
+
+        private static readonly __Value<string?> _cert_data = new __Value<string?>(() => __config.Get("cert_data"));
+        public static string? Cert_data
+        {
+            get => _cert_data.Get();
+            set => _cert_data.Set(value);
+        }
+
+        private static readonly __Value<string?> _cert_file = new __Value<string?>(() => __config.Get("cert_file"));
+        public static string? Cert_file
+        {
+            get => _cert_file.Get();
+            set => _cert_file.Set(value);
+        }
+
         private static readonly __Value<Pulumi.Elasticstack.Config.Types.Elasticsearch?> _elasticsearch = new __Value<Pulumi.Elasticstack.Config.Types.Elasticsearch?>(() => __config.GetObject<Pulumi.Elasticstack.Config.Types.Elasticsearch>("elasticsearch"));
         /// <summary>
         /// Elasticsearch connection configuration block.
@@ -40,6 +75,48 @@ namespace Pulumi.Elasticstack
         {
             get => _elasticsearch.Get();
             set => _elasticsearch.Set(value);
+        }
+
+        private static readonly __Value<ImmutableArray<string>> _endpoints = new __Value<ImmutableArray<string>>(() => __config.GetObject<ImmutableArray<string>>("endpoints"));
+        public static ImmutableArray<string> Endpoints
+        {
+            get => _endpoints.Get();
+            set => _endpoints.Set(value);
+        }
+
+        private static readonly __Value<bool?> _insecure = new __Value<bool?>(() => __config.GetBoolean("insecure"));
+        public static bool? Insecure
+        {
+            get => _insecure.Get();
+            set => _insecure.Set(value);
+        }
+
+        private static readonly __Value<string?> _key_data = new __Value<string?>(() => __config.Get("key_data"));
+        public static string? Key_data
+        {
+            get => _key_data.Get();
+            set => _key_data.Set(value);
+        }
+
+        private static readonly __Value<string?> _key_file = new __Value<string?>(() => __config.Get("key_file"));
+        public static string? Key_file
+        {
+            get => _key_file.Get();
+            set => _key_file.Set(value);
+        }
+
+        private static readonly __Value<string?> _password = new __Value<string?>(() => __config.Get("password"));
+        public static string? Password
+        {
+            get => _password.Get();
+            set => _password.Set(value);
+        }
+
+        private static readonly __Value<string?> _username = new __Value<string?>(() => __config.Get("username"));
+        public static string? Username
+        {
+            get => _username.Get();
+            set => _username.Set(value);
         }
 
         public static class Types
